@@ -13,7 +13,7 @@ const surgeonRoutes = require('./routes/surgeon');
 
 app.use(cors({
     credentials: false,  // This enables credentials in the CORS request
-    origin: true,
+    origin: '*',
 }));
 
 app.get('/', (req, res)=>{

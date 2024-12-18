@@ -11,7 +11,7 @@ router.get('/',auth, async(req, res)=>{
     }
     catch(error){
         console.log(error);
-        res.json(error);
+        res.status(500).json(error);
     }
 })
 
@@ -23,7 +23,7 @@ router.post('/',auth, async (req, res) => {
     }
     catch (error) {
         console.log(error);
-        res.json(error);
+        res.status(500).json(error);
     }
 });
 
@@ -32,12 +32,12 @@ router.put('/:id',auth, async (req, res) => {
     try {
         const id = req.params.id;
         const updateData = req.body;
-        const newPatient = await Patient.findByIdAndUpdate(id, updateData, {new: true});
+        const newPatient = await Patient.findByIdAndUpdate(id, updateData, {runValidators: true, context: 'query', new: true});
         res.json(newPatient);
     }
     catch (error) {
         console.log(error);
-        res.json(error);
+        res.status(500).json(error);
     }
 });
 
